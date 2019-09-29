@@ -52,7 +52,6 @@ function runGetFeature(callback) {
       return;
     }
     if (feature.name === '') {
-      console.log("feature, ", feature);
       console.log('Found no feature at ' +
           feature.location.latitude/COORD_FACTOR + ', ' +
           feature.location.longitude/COORD_FACTOR);
@@ -101,8 +100,8 @@ function runListFeatures(callback) {
           feature.location.latitude/COORD_FACTOR + ', ' +
           feature.location.longitude/COORD_FACTOR);
   });
-  call.on('end', (something)=>{
-    console.log('on end', something);
+  call.on('end', ()=>{
+    
     callback();
   });
 }
@@ -220,6 +219,7 @@ function runRouteChat(callback) {
  * Run all of the demos in order
  */
 function main() {
+  console.log('start main');
   async.series([
     runGetFeature,
     runListFeatures,

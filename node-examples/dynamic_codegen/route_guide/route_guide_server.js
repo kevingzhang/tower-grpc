@@ -16,8 +16,8 @@
  *
  */
 
-var PROTO_PATH = __dirname + '/../../tower-grpc-examples/protos/route_guide.proto';
-var DATABASE_JSON_PATH = __dirname + '/../../tower-grpc-examples/data/route_guide_db.json';
+var PROTO_PATH = __dirname + '/../../../tower-grpc-examples/proto/routeguide/route_guide.proto';
+var DATABASE_JSON_PATH = __dirname + '/../../../tower-grpc-examples/data/route_guide_db.json';
 var fs = require('fs');
 var parseArgs = require('minimist');
 var path = require('path');
@@ -218,7 +218,7 @@ function routeChat(call) {
  */
 function getServer() {
   var server = new grpc.Server();
-  server.addProtoService(routeguide.RouteGuide.service, {
+  server.addService(routeguide.RouteGuide.service, {
     getFeature: getFeature,
     listFeatures: listFeatures,
     recordRoute: recordRoute,
@@ -230,7 +230,7 @@ function getServer() {
 if (require.main === module) {
   // If this is run as a script, start a server on an unused port
   var routeServer = getServer();
-  routeServer.bind('0.0.0.0:50051', grpc.ServerCredentials.createInsecure());
+  routeServer.bind('0.0.0.0:10000', grpc.ServerCredentials.createInsecure());
   fs.readFile(path.resolve(DATABASE_JSON_PATH), function(err, data) {
     if (err) throw err;
     feature_list = JSON.parse(data);
