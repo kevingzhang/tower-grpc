@@ -1,19 +1,30 @@
-# Tower gRPC
+# Try Rust and Node gRPC communication on Towner-grpc
 
-A client and server gRPC implementation based on Tower.
+Original readme is [here](./README_origin.md). 
+Most of the code are forked from https://github.com/tower-rs/tower-grpc, I added the node.js example from official gRPC.io example. Made a few modification make sure they works together.
 
-[![Build Status](https://travis-ci.org/tower-rs/tower-grpc.svg?branch=master)](https://travis-ci.org/tower-rs/tower-grpc)
+The goal of this small project is to demo how to interoperate between Rust and Node using g-RPC using Towner-gRPC
 
-More information about this crate can be found in the [crate documentation][dox]
+Please only try the route_guide example, because this is the most complete demo for all 4 types of gRPC protocol. 
 
-[dox]: https://tower-rs.github.io/tower-grpc/tower_grpc
+You can run server and client in both Rust or Node, they are interoperatable.
 
-## License
+## For example, run Rust server and node client
+In one terminal
+``` bash
+$ cd tower-grpc-examples
+$ RUST_BACKTRACE=1 cargo run --bin route-guide-server ./data/route_guide_db.json
+```
+In another terminal
+```bash
+$ cd /node-examples/dynamic_codegen/route_guide
+$ node route_guide_client.js 
+```
+Assume you know how to ```npm install``` to setup the node.
 
-This project is licensed under the [MIT license](LICENSE).
+You can also try to run node server and rust client vice versa.
 
-### Contribution
+## Try other languages
 
-Unless you explicitly state otherwise, any contribution intentionally submitted
-for inclusion in `tower-grpc` by you, shall be licensed as MIT, without any
-additional terms or conditions.
+In official gRPC examples, there are many other languages, all of them should work. Just make sure they share the same proto file and data file.
+
